@@ -18,5 +18,8 @@ public:
 	Table(pc_color color_up);
 	virtual ~Table();
 	void draw(SDL_Surface* screen);
+	
+	// SDL2
+	void SDL2_draw(SDL_Renderer* renderer);
 
 };

@@ -1,13 +1,4 @@
 #pragma once
-/*
- * AI.h
- *
- *  Created on: 2 ao?t 2015
- *      Author: filipe
- */
-
-#ifndef AI_H_
-#define AI_H_
 
 #include "Player.h"
 #include "Piece.h"
@@ -48,6 +39,9 @@ public:
 
 	void draw(SDL_Surface* screen);
 
+	// SDL2
+	void SDL2_draw(SDL_Renderer* renderer);
+
 	void mouseMove(int x, int y);
 
 	void click(int x, int y);
@@ -60,5 +54,3 @@ public:
 
 	AImove* getBestMove(vector<AImove*>& moveList, int layer, int maxLayer);
 };
-
-#endif /* AI_H_ */

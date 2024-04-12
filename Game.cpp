@@ -77,3 +77,11 @@ void Game::draw(SDL_Surface* screen) {
 	player_black->draw(screen);
 	player_white->draw(screen);
 }
+
+// SDL2
+void Game::SDL2_draw(SDL_Renderer* renderer)
+{
+	table.SDL2_draw(renderer);
+	player_black->SDL2_draw(renderer);
+	player_white->SDL2_draw(renderer);
+}

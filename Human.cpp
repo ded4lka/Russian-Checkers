@@ -30,6 +30,14 @@ void Human::draw(SDL_Surface* screen) {
 			"selection", screen);
 }
 
+void Human::SDL2_draw(SDL_Renderer* renderer)
+{
+	if (selected)
+		this->applyTexture(selected_case.first * 60,
+			selected_case.second * 60,
+			"selection", renderer);
+}
+
 void Human::click(int x, int y) {
 	position pos;
 	pos.first = x;
