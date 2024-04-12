@@ -39,6 +39,24 @@ int main(int argc, char* argv[]) {
         SDL_Quit();
         return 1;
     }
+    Drawable::renderer = renderer;
+
+
+
+    // Загрузка первой текстуры
+    SDL_Texture* texture1 = IMG_LoadTexture(renderer, "img/bpiece.png");
+    if (texture1 == nullptr) {
+        // Обработка ошибки загрузки текстуры
+    }
+
+    // Загрузка второй текстуры
+    SDL_Texture* texture2 = IMG_LoadTexture(renderer, "img/wpiece.png");
+    if (texture2 == nullptr) {
+        // Обработка ошибки загрузки текстуры
+    }
+
+    SDL_RenderPresent(renderer);
+
 
     // Initialize SDL_image
     int imgFlags = IMG_INIT_JPG | IMG_INIT_PNG;
@@ -68,10 +86,17 @@ int main(int argc, char* argv[]) {
                 game.mouseMove(event.motion.x, event.motion.y);
         }
 
+        // Delay for FPS stability
+        if (SDL_GetTicks() - frametime < minframetime)
+            SDL_Delay(minframetime - (SDL_GetTicks() - frametime));
+
+        // Game logic and drawing
         game.play();
 
         // Clear the renderer
-        SDL_RenderClear(renderer);
+        //SDL_RenderClear(renderer);
+
+        game.SDL2_draw(renderer);
 
         // Render to screen
         SDL_RenderPresent(renderer);

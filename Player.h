@@ -22,6 +22,9 @@ public:
 
 	virtual void draw(SDL_Surface* screen) = 0;
 
+	// SDL2
+	virtual void SDL2_draw(SDL_Renderer* renderer) = 0;
+
 	pc_color getColor();
 
 	vector<Piece>* getPieces();

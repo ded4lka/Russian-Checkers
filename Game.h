@@ -22,6 +22,9 @@ public:
 
 	void draw(SDL_Surface* screen);
 
+	// SDL2
+	void SDL2_draw(SDL_Renderer* renderer);
+
 	void click(int x, int y);
 
 	void play();

@@ -20,42 +20,46 @@ void AI::clearTree(vector<AImove*>& tree) {
 }
 
 GameMove* AI::play() {
+	// Create a list of possible moves
 	vector<AImove*> moveList;
 	vector<Piece>* myPieces = getPieces();
 
+	// Iterate through all pieces to find their possible moves
 	for (int i = 0; i < myPieces->size(); i++) {
 		vector<AImove*> moves = possibleMovesForPiece(myPieces->at(i), NULL);
 		moveList.insert(moveList.end(), moves.begin(), moves.end());
 	}
-	//create minimax tree
+
+	// Create minimax tree to analyze possible moves
 	vector<AImove*> nowList = moveList;
 	vector<AImove*> nextList;
 	for (int i = 0; i < this->maxDepth - 1; i++) {
-		//for each table in this level
+		// Iterate through each move in the current level
 		for (int j = 0; j < nowList.size(); j++) {
 			AImove* m = nowList[j];
 			AITable& table = m->tableGame;
 			vector<Piece>* myPieces = getPieces(table);
-			//go through the pieces and generate a new level of movements
+			// Generate new level of movements by iterating through pieces
 			for (int k = 0; k < myPieces->size(); k++) {
 				vector<AImove*> moves = possibleMovesForPiece(myPieces->at(k), m);
 				nowList[j]->next.insert(nowList[j]->next.end(), moves.begin(), moves.end());
 				nextList.insert(nextList.end(), moves.begin(), moves.end());
 			}
 		}
-		//goes to the next level.
+		// Move to the next level
 		nowList = nextList;
 		std::cout << "Level:" << i << " possibilities:" << nowList.size() << std::endl;
 		nextList.clear();
 	}
 
-	//get best move in minimax
+	// Find the best move using minimax algorithm
 	GameMove* retMove = new GameMove();
 	AImove* aiMove = getBestMove(moveList, 0, this->maxDepth);
 	retMove->start = aiMove->m.start;
 	retMove->end = aiMove->m.end;
 	cout << "Size of list = " << moveList.size() << endl;
 
+	// Clear the minimax tree to free memory
 	this->clearTree(moveList);
 
 	return retMove;
@@ -151,5 +155,10 @@ void AI::mouseMove(int x, int y) {
 }
 
 void AI::draw(SDL_Surface* screen) {
+
+}
+
+void AI::SDL2_draw(SDL_Renderer* renderer)
+{
 
 }
